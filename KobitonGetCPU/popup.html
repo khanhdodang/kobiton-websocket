@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Kobiton Websocket Client</title>
+    
+</head>
+<style type="text/css">
+    .intro {
+        font-size: 16px;
+        background-color: #ddffdd;
+        border-left: 2px solid #4CAF50;
+    }
+
+    #WebSocket {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    #WebSocket td, #WebSocket th {
+      border: 1px solid #ddd;
+      padding: 2px;
+      text-align: center;
+    }
+
+    #WebSocket tr:nth-child(even){background-color: #f2f2f2;}
+
+    #WebSocket tr:hover {background-color: #ddd;}
+
+    #WebSocket th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: center;
+      background-color: #4CAF50;
+      color: white;
+    }
+    .btn {
+      background-color:#44c767;
+      -moz-border-radius:6px;
+      -webkit-border-radius:6px;
+      border-radius:6px;
+      border:1px solid #18ab29;
+      display:inline-block;
+      cursor:pointer;
+      color:#ffffff;
+      font-family:Arial;
+      font-size:16px;
+      padding:5px 10px;
+      text-decoration:none;
+      text-shadow:0px 1px 0px #2f6627;
+    }
+    .btn:hover {
+      background-color:#5cbf2a;
+    }
+    .btn:active {
+      position:relative;
+      top:1px;
+    }
+
+</style>
+
+<body id="wsbody">
+    <h2>Get device metrics during running session</h2>
+    <div class="intro">
+        <h4>Here is a guide:</h4>
+        <ul>
+            <li> Select your environment <b>Test | Staging | Production</b></li>
+            <li> Enter your <b>username</b> and <b>apiKey</b> then click <b>Save</b> button </li>
+            <li> Enter Running test session ID to get Websocket responses </li>
+            <ul>
+                <li> Edit interval times</li>
+                <li> Edit connections concurrent</li>
+            </ul>
+            <li> Click <b>Connect</b> button </li>
+            <li> If you want to get session info, please click <b>Get Session Info</b> button </li><br>
+            <li> More info <a target="_blank" href="https://api.kobiton.com/docs/?shell#get-metric-url-stream">https://api.kobiton.com/docs/?shell#get-metric-url-stream</a></li>
+            <li id="apiURLInfo"></li>
+            <li id="SessionsLink"></li>
+            <li id="SessionDetailsLink"></li>
+        </ul>
+    </div>
+    <div class="intro">
+        <h4>Configuration:</h4>
+        <div>Server URL:
+        <select id="apiURL">
+            <option value="https://api-test.kobiton.com">Test</option>
+            <option value="https://api-staging.kobiton.com">Staging</option>
+            <option value="https://api.kobiton.com">Production</option>
+        </select>
+        Interval: <input type="number" id="interval" min="1" max="60" value="5">
+        Connection(s): <input type="number" id="connections" min="1" max="50" value="5"></div>
+        <div>Username: <input type="text" id="username" size="20" value="khanhdo">
+        API Key:
+        <input type="text" id="apikey" size="40" value="7c3fa781-xxxx-43e9-8dfd-294509985d05"></div>
+        <div>Session ID: <input type="number" id="sessionId" value="12345" min="1" max="999999999">
+        </div>
+        <br>
+        <a class="btn" id="save">Save Environments</a>
+        <br>
+    </div>
+    <br>
+    <a class="btn" id="sessionInfo">Get Session Info</a>
+    <br>
+    <p id="sError" style="color:red"></p>
+    <textarea id="sInfo" rows="10" cols="100"></textarea>
+    <br>
+    <br>
+    <a class="btn" id="connect">Open a WebSocket connection</a> <a id="clearLog" class="btn">Clear log</a><br>
+    <h3>Websocket Responses:</h3>
+    <br/>
+    <table id="WebSocket" align="center">
+        <tr>
+            <th>Request ID</th>
+            <th>Time (hh:mm:ss)</th>
+            <th>% CPU</th>
+            <th>% Memory</th>
+            <th>WiFi receivedByte</th>
+            <th>WiFi transmittedBytes</th>
+        </tr>
+
+        <tbody id="log"></tbody>
+    </table>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="content_script.js"></script>
+</body>
+
+</html>
